@@ -162,9 +162,9 @@ Before running the application, make sure you have installed:
 Clone the repository
 
 ```bash
-git clone https://github.com/your-username/release-checklist-tool.git
+git clone https://github.com/Shubhamrawat23/checklist_tool.git
 
-cd release-checklist-tool/backend
+cd checklist_tool/backend
 ```
 
 Create virtual environment
@@ -392,23 +392,23 @@ This approach provides the following advantages:
 
 ## Frontend
 
-Hosted on **Vercel**
+Hosted on **Render**
 
 ```
-https://your-frontend-url.vercel.app
+https://checklist-tool-w3ya.onrender.com/
 ```
 
 ## Backend
 
-Hosted on **Railway** or **Render**
+Hosted on **Render**
 
 ```
-https://your-backend-url.up.railway.app
+https://checklist-tool-backend.onrender.com
 ```
 
 ## Database
 
-Hosted on PostgreSQL (Neon / Railway / Supabase)
+Hosted on PostgreSQL (Render)
 
 ---
 
