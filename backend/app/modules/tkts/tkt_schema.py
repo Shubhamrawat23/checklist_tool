@@ -6,12 +6,12 @@ class CreateTktSchema(BaseModel):
     release_date: str
     notes: str
 
+class TaskUpdate(BaseModel):
+    task_id: int
+    is_completed: bool
+
 class UpdateTktSchema(BaseModel):
     name: Optional[str] = None
     release_date: Optional[str] = None
     notes: Optional[str] = None
     task: Optional[List[TaskUpdate]] = None
-
-class TaskUpdate(BaseModel):
-    task_id: int
-    is_completed: bool
