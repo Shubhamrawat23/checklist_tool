@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+npm-debug.log*
+
+
+# Build outputs
+dist
+build
+
+# Git and documentation
+.git
+.gitignore
+README.md
+docs
+
+# Local environment files
+.env
+
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Docker configuration files (no need to copy them inside the container)
+Dockerfile
+docker-compose.yml
