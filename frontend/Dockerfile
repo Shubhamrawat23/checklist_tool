@@ -16,6 +16,6 @@ FROM nginx
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder /myapp/dst  /usr/share/nginx/html
+COPY --from=builder /myapp/dist  /usr/share/nginx/html
 
 EXPOSE 80
