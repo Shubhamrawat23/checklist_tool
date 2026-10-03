@@ -12,10 +12,15 @@ RUN npm run build
 
 
 
+
 FROM nginx
 
 RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=builder /myapp/dist  /usr/share/nginx/html
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY nginx.conf /etc/nginx/conf.d
 
 EXPOSE 80
