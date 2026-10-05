@@ -1,0 +1,74 @@
+volumes:
+  checklist_vol:
+    name: checklist_vol
+
+networks:
+  checklist_net: 
+    driver: bridge
+    name: checklist_net
+
+services:
+  # db container
+  checklist_db:
+    name: checklist_db
+    image: postgres
+    restart: always
+    networks:
+      - 'checklist_net'
+    environment:
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: 'release_checklist'
+      POSTGRES_USER: 'sr_admin'
+      POSTGRES_PASSWORD: '123@123sr'
+    volumes:
+      - 'checklist_vol:/var/lib/postgresql/data'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U sr_admin -d release_checklist']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  db_tables_setup:
+    build: ./backend
+    restart: no
+    depends_on:
+      checklist_db:
+        condition: service_healthy
+    environment:
+      DB_HOST: 'checklist_db'
+      DB_NAME: 'release_checklist'
+      DB_USER: 'sr_admin'
+      DB_PASSWORD: '123@123sr'
+      DB_PORT: '5432'
+    command: "python -m app.db.db_tabels"
+    networks:
+      - checklist_net
+
+  #backend container
+  backend:
+    container_name: 'checklist_back_cont'
+    build: ./backend
+    restart: always
+    depends_on:
+      db_tables_setup:
+      condition: service_completed_successfully
+    environment:
+      DB_HOST: 'checklist_db'
+      DB_NAME: 'release_checklist'
+      DB_USER: 'sr_admin'
+      DB_PASSWORD: '123@123sr'
+      DB_PORT: '5432'
+    networks:
+      - 'checklist_net'
+
+  #backend container
+  frontend:
+    container_name: 'checklist_front_cont'
+    restart: always
+    depends_on:
+      - backend
+    build: ./frontend
+    networks:
+      - 'checklist_net'
+    ports:
+     - '80:80'
