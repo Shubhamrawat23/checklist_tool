@@ -51,7 +51,7 @@ services:
     restart: always
     depends_on:
       db_tables_setup:
-      condition: service_completed_successfully
+        condition: service_completed_successfully
     environment:
       DB_HOST: 'checklist_db'
       DB_NAME: 'release_checklist'
