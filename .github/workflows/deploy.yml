@@ -15,6 +15,8 @@ jobs:
     services:
         postgres:
           image: postgres:latest
+          ports:
+            - 5432:5432
           env:
             POSTGRES_DB: 'release_checklist'
             POSTGRES_USER: 'sr_admin'
