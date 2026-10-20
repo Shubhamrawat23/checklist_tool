@@ -12,6 +12,7 @@ services:
   checklist_db:
     image: postgres
     restart: always
+    container_name: checklist_db
     networks:
       - 'checklist_net'
     environment:
