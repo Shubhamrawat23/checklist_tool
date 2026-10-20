@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ReleaseForm from "../components/releaseForm";
 import { BASE_URL } from "../config";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ export default function Listing() {
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
 
-  const fetchReleases = async () => {
+  const fetchReleases = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
@@ -32,11 +32,11 @@ export default function Listing() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchReleases();
-  }, []);
+  }, [fetchReleases]);
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
@@ -63,7 +63,7 @@ export default function Listing() {
       fetchReleases();
 
     } catch (err) {
-      setError("Failed to connect to server.");
+      setError("Failed to connect to server. ", err);
     }
   };
 

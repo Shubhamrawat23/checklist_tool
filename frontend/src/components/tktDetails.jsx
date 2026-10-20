@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BASE_URL } from "../config";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -32,7 +32,7 @@ export default function ReleaseTktDetails() {
     const [saved, setSaved] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchRelease = async () => {
+    const fetchRelease = useCallback(async () => {
         try {
             setLoading(true);
             setError(null);
@@ -53,15 +53,15 @@ export default function ReleaseTktDetails() {
             setTasks(json.data.tasks || []);
             setNotes(json.data.notes || "");
         } catch (err) {
-            setError("Failed to connect to server.");
+            setError("Failed to connect to server. ", err);
         } finally {
             setLoading(false);
         }
-    };
+    }, [])
 
     useEffect(() => {
         fetchRelease();
-    }, [releaseId]);
+    }, [releaseId, fetchRelease]);
 
     const toggleTask = (taskId) => {
         setTasks((prev) =>
@@ -114,7 +114,7 @@ export default function ReleaseTktDetails() {
 
             fetchRelease();
         } catch (err) {
-            setError("Failed to connect to server.");
+            setError("Failed to connect to server. ", err);
         } finally {
             setSaving(false);
         }
@@ -147,7 +147,7 @@ export default function ReleaseTktDetails() {
 
             navigate("/");
         } catch (err) {
-            setError("Failed to connect to server.");
+            setError("Failed to connect to server. ", err);
         } finally {
             setDeleting(false);
         }
