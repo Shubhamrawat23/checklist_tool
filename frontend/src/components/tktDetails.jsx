@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BASE_URL } from "../config";
 import { useNavigate, useParams } from "react-router-dom";
 
 
-function formatDate(iso) {
-    if (!iso) return "—";
+// function formatDate(iso) {
+//     if (!iso) return "—";
 
-    const d = new Date(iso);
+//     const d = new Date(iso);
 
-    if (isNaN(d.getTime())) return iso;
+//     if (isNaN(d.getTime())) return iso;
 
-    return d.toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-    });
-}
+//     return d.toLocaleDateString("en-GB", {
+//         day: "2-digit",
+//         month: "short",
+//         year: "numeric",
+//     });
+// }
 
 export default function ReleaseTktDetails() {
     const navigate = useNavigate();
@@ -31,10 +31,6 @@ export default function ReleaseTktDetails() {
 
     const [saved, setSaved] = useState(false);
     const [error, setError] = useState(null);
-
-    useEffect(() => {
-        fetchRelease();
-    }, [releaseId]);
 
     const fetchRelease = async () => {
         try {
@@ -62,6 +58,10 @@ export default function ReleaseTktDetails() {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        fetchRelease();
+    }, [releaseId]);
 
     const toggleTask = (taskId) => {
         setTasks((prev) =>

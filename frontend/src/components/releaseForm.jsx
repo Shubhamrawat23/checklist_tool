@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {BASE_URL} from "../config";
 
 function getTomorrowISO() {
@@ -58,7 +58,7 @@ export default function ReleaseForm({ onSuccess, onCancel }){
 
       if (onSuccess) onSuccess(json.data);
     } catch (err) {
-      setError("Couldn't reach the API. Check that the server is running.");
+      setError("Couldn't reach the API. Check that the server is running. ", err);
     } finally {
       setSubmitting(false);
     }

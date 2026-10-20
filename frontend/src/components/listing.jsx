@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ReleaseForm from "../components/releaseForm";
 import { BASE_URL } from "../config";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Listing() {
   const [releases, setReleases] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function Listing() {
       const items = (json.data || []).filter((r) => !r.is_delete);
       setReleases(items);
     } catch (err) {
-      setError("Couldn't reach the API");
+      setError("Couldn't reach the API", err);
       setReleases([]);
     } finally {
       setLoading(false);

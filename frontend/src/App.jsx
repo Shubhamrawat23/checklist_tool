@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Listing from "../src/components/listing";
 import ReleaseTktDetails from "../src/components/tktDetails";
