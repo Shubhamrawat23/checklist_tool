@@ -6,14 +6,14 @@ import { useNavigate } from "react-router-dom";
 
 export default function Listing() {
   const [releases, setReleases] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
 
   const fetchReleases = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+    // setLoading(true);
+    // setError(null);
     try {
       const res = await fetch(`${BASE_URL}/tkt/list`, { headers: { accept: "application/json" } });
       const json = await res.json();

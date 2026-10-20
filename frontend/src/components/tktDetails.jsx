@@ -25,7 +25,7 @@ export default function ReleaseTktDetails() {
     const [tasks, setTasks] = useState([]);
     const [notes, setNotes] = useState("");
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [deleting, setDeleting] = useState(false);
 
@@ -34,8 +34,8 @@ export default function ReleaseTktDetails() {
 
     const fetchRelease = useCallback(async () => {
         try {
-            setLoading(true);
-            setError(null);
+            // setLoading(true);
+            // setError(null);
 
             const res = await fetch(`${BASE_URL}/tkt/${releaseId}`);
 
