@@ -6,6 +6,9 @@ app = FastAPI()
 
 origins = [
     "http://localhost:5173",
+    "http://http://213.210.37.34:8000"
+    "http://http://213.210.37.34:8000/"
+    "http://http://213.210.37.34:8000/api"
     "https://checklist-tool-w3ya.onrender.com"
 ]
 

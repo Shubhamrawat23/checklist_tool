@@ -61,13 +61,16 @@ services:
     networks:
       - 'checklist_net'
 
-  #backend container
+  #frontend container
   frontend:
     container_name: 'checklist_front_cont'
     restart: always
     depends_on:
       - backend
-    build: ./frontend
+    build: 
+      context: ./frontend
+      args:
+        VITE_BASE_URL: /api
     networks:
       - 'checklist_net'
     ports:
