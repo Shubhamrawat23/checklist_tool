@@ -27,7 +27,7 @@ export default function Listing() {
       const items = (json.data || []).filter((r) => !r.is_delete);
       setReleases(items);
     } catch (err) {
-      setError("Couldn't reach the API", err);
+      setError(`Couldn't reach the API ${err?.message}`);
       setReleases([]);
     } finally {
       setLoading(false);
@@ -35,6 +35,7 @@ export default function Listing() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchReleases();
   }, [fetchReleases]);
 
@@ -63,7 +64,7 @@ export default function Listing() {
       fetchReleases();
 
     } catch (err) {
-      setError("Failed to connect to server. ", err);
+      setError(`Failed to connect to server. ${err?.message}`);
     }
   };
 

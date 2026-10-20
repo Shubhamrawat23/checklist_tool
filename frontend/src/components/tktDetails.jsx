@@ -53,13 +53,14 @@ export default function ReleaseTktDetails() {
             setTasks(json.data.tasks || []);
             setNotes(json.data.notes || "");
         } catch (err) {
-            setError("Failed to connect to server. ", err);
+            setError(`Failed to connect to server ${err?.message}`);
         } finally {
             setLoading(false);
         }
     }, [releaseId])
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         fetchRelease();
     }, [fetchRelease]);
 
@@ -114,7 +115,7 @@ export default function ReleaseTktDetails() {
 
             fetchRelease();
         } catch (err) {
-            setError("Failed to connect to server. ", err);
+            setError(`Failed to connect to server ${err?.message}`);
         } finally {
             setSaving(false);
         }
@@ -147,7 +148,7 @@ export default function ReleaseTktDetails() {
 
             navigate("/");
         } catch (err) {
-            setError("Failed to connect to server. ", err);
+            setError(`Failed to connect to server. ${err?.message}`);
         } finally {
             setDeleting(false);
         }
