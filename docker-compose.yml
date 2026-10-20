@@ -10,7 +10,6 @@ networks:
 services:
   # db container
   checklist_db:
-    name: checklist_db
     image: postgres
     restart: always
     networks:
