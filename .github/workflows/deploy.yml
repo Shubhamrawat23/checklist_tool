@@ -47,13 +47,13 @@ jobs:
             sleep 1
           done
           python -m app.db.db_tabels
-          pip install flake8 pytest
+          pip install flake8
 
       - name: test the backend
         working-directory: ./backend
         run: |
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics #syntax, invalid comparision, control flow errors & undefined variables'
-          pytest
+          python -m pytest
           
       - name: Set up node
         uses: actions/setup-node@v4

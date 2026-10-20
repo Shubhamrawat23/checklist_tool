@@ -8,7 +8,7 @@ client = TestClient(app)
 
 @pytest.fixture
 def created_ticket():
-    random_text = str(uuid.uid4())[:8]
+    random_text = str(uuid.uuid4())[:8]
     name = f"pytest-{random_text}"
     payload = {
         "name": name,
@@ -19,7 +19,8 @@ def created_ticket():
     assert response.status_code in (200, 201), response.text
 
     body = response.json()
-    tkt_id = body.get("tkt_id") or body.get("id")
+    data = body.get("data", {})
+    tkt_id = data.get("tkt_id") or data.get("id")
     assert tkt_id is not None, f"No id in response: {body}"
 
     yield {"id": tkt_id, "name": name}
@@ -52,4 +53,6 @@ def test_update_ticket(created_ticket):
 def test_list_returns_list():
     response = client.get("/tkt/list")
     assert response.status_code == 200
-    assert isinstance(response.json(), list)
+    body = response.json()
+    assert body["success"] is True
+    assert isinstance(body.get("data"), list)
