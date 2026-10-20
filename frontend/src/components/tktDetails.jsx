@@ -25,7 +25,7 @@ export default function ReleaseTktDetails() {
     const [tasks, setTasks] = useState([]);
     const [notes, setNotes] = useState("");
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [saving, setSaving] = useState(false);
     const [deleting, setDeleting] = useState(false);
 
@@ -57,11 +57,11 @@ export default function ReleaseTktDetails() {
         } finally {
             setLoading(false);
         }
-    }, [])
+    }, [releaseId])
 
     useEffect(() => {
         fetchRelease();
-    }, [releaseId, fetchRelease]);
+    }, [fetchRelease]);
 
     const toggleTask = (taskId) => {
         setTasks((prev) =>
