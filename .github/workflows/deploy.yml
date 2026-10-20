@@ -47,7 +47,7 @@ jobs:
             sleep 1
           done
           python -m app.db.db_tabels
-          pip install flake8
+          pip install flake8 pytest
 
       - name: test the backend
         working-directory: ./backend
